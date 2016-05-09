@@ -18,6 +18,10 @@ public class FitnessFunction {
         maximumCredits = sumCredits;
     }
     
+    public long getBestFitnessPossible(){
+        return maximumCredits;
+    }
+    
     public long getFitness(boolean state[]) throws Exception{
         if(state.length != discips.length)
             throw new Exception("Vetor de seleção de disciplinas possui tamanho diferente do vetor de diciplinas");
@@ -102,7 +106,7 @@ public class FitnessFunction {
     }
     
     private int countMoreThanFiveIntervalsSequence(List<Integer> intervals){
-        int ini = 0,prox = 0, overflow = 0;
+        int ini = 0,prox = 1, overflow = 0;
         
         //Verifica sequência de horarios para identificar se existem mais de 5 disciplinas em sequencia
         for(;prox < intervals.size(); prox++){

@@ -1,6 +1,7 @@
 package geneticalgorithm;
 
 import java.util.List;
+import java.util.Objects;
 
 public class Discipline {
     
@@ -17,8 +18,6 @@ public class Discipline {
         this.credits = credits;
         this.intervals = intervals;
     }
-
-
 
     public String getName() {
         return disciplineName;
@@ -40,14 +39,14 @@ public class Discipline {
         return disciplineName;
     }
 
-    public int getClass_n() {
+    public int getDisciplineNumber() {
         return disciplineNum;
     }
     
     public boolean isObrigatory(){
         String regex= "(?i)(";
         for(EObrigatoryTokens t: EObrigatoryTokens.values())
-            regex += t.getDisciplineName() + "| ";
+            regex += t.getDisciplineName() + " ";
         regex = regex.trim().substring(0,regex.length()-1) + ")";
         return disciplineName.matches(regex);
     }
@@ -72,5 +71,31 @@ public class Discipline {
         str = str.substring(0,str.length()-2);
         str += "}};";
         return str;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 59 * hash + Objects.hashCode(this.disciplineName);
+        hash = 59 * hash + this.disciplineNum;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Discipline other = (Discipline) obj;
+        if (!Objects.equals(this.disciplineName, other.disciplineName)) {
+            return false;
+        }
+        if (this.disciplineNum != other.disciplineNum) {
+            return false;
+        }
+        return true;
     }
 }

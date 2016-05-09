@@ -7,6 +7,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.StringTokenizer;
 
@@ -54,6 +55,22 @@ public class ReadDisciplines {
                 int intervalDuration = (Integer.valueOf(x).intValue()-2)*24+Integer.valueOf(y).intValue()+6;
                 intervals.add(intervalDuration);
             }
+            List<Integer> interInterval = new ArrayList<>();
+            for(int i = 0; i < intervals.size()/2; i++){
+                int nIt = intervals.get(2*i+1) - intervals.get(2*i);
+                for(int j = 1; j < nIt; j++)
+                    interInterval.add(intervals.get(2*i)+j);
+            }
+            intervals.addAll(interInterval);
+            for(int i = intervals.size()/2-1; i >= 0; i--)
+            if(intervals.get(2*i+1) == intervals.get(2*i))
+            intervals.remove(2*i);
+            intervals.sort(new Comparator<Integer>(){
+                @Override
+                public int compare(Integer o1, Integer o2) {
+                    return o1 - o2;
+                }
+            });
             Discipline disc = new Discipline(id,classLetters.trim(),Integer.valueOf(classDigits).intValue(), Integer.valueOf(credits).intValue(), intervals);
             disciplines.add(disc);
             id++;
