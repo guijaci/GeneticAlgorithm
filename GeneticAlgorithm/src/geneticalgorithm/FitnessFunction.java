@@ -134,7 +134,7 @@ public class FitnessFunction {
         for(int i = 1; i < intervals.size(); i++)
             //Caso o intervalo entre a ultima aula de um dia e a primeira do dia seguinte seja menor que 
             //12 horas deve incrementar o contador
-            if(intervals.get(i)-intervals.get(i-1) < 12 && intervals.get(i)/24 != intervals.get(i-1)/24)
+            if(intervals.get(i)-intervals.get(i-1) <= 12 && intervals.get(i)/24 != intervals.get(i-1)/24)
                 contSmallDelay++;
         return contSmallDelay;
     }
